@@ -2,8 +2,8 @@ const createError = require('http-errors');
 const express = require('express');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index.router');
+const usersRouter = require('./routes/users.router');
 
 const app = express();
 
