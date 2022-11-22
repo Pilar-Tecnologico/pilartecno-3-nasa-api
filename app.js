@@ -2,12 +2,20 @@ require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const logger = require('morgan');
+const mongodb = require('./databases/mongodb.connection');
 
 const indexRouter = require('./src/routes/index.router');
 const nasaRouter = require('./src/routes/nasa.router');
+const teamsRouter = require('./src/routes/teams.router');
+
 
 
 const app = express();
+
+mongodb.connectMongoDb()
+    .then(() => console.log('Mongodb Connected'))
+    .catch(err => console.log(err));
+
 
 
 app.use(logger('dev'));
@@ -16,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 app.use('/nasa', nasaRouter);
+app.use('/teams', teamsRouter);
 
 
 // catch 404 and forward to error handler
